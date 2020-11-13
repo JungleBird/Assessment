@@ -16,34 +16,41 @@ const size = {
 }
 
 export const TitleText = styled.div`
-  font-size: ${size.normal};
-  color: ${colors.black};
+    font-size: ${size.normal};
+    color: ${colors.black};
 `;
 
 export const SubText = styled.div`
-  font-size: ${size.normal};
-  color: ${colors.lightgray};
+    font-size: ${size.normal};
+    color: ${colors.lightgray};
 `;
 
 export const BookShelfWrapper = styled.div`
-display: flex;
-flex: 1;
-flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
 `;
 
 export const BookHeaderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: ${spacing.medium};
+    flex: 1;
+    flex-direction: column;
+    padding: ${spacing.small};
 `;
 
 export const BookImageWrapper = styled.div`
-  display: box;
-  padding: ${spacing.medium};
+    flex: 2;
+    min-width: 10em;
+    padding: ${spacing.small};
+`;
+
+export const BookCardWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: ${spacing.medium};
 `;
 
 export const BookShelfContainer = styled.div`
     display: flex
-    width: 100%;
+    width: 100vh;
     height: 100vh;
 `;
