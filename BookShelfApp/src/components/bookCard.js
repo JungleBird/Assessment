@@ -3,21 +3,23 @@ import {TitleText, BookCardWrapper, BookHeaderWrapper, BookImageWrapper} from '.
 
 export default function BookCard(props) {
 
-    const displayBookHeader = (title, author) => {
+    const {title, author_name, cover_i} = props
+
+    const displayBookHeader = () => {
         return (
             <BookHeaderWrapper>
                 <TitleText>{title}</TitleText>
-                <TitleText>{author}</TitleText>
+                <TitleText>{author_name}</TitleText>
             </BookHeaderWrapper>
         );
     }
 
-    const displayBookImage = (imageId) => {
-        const source='http://covers.openlibrary.org/b/id/'+imageId+'-M.jpg';
+    const displayBookImage = () => {
+        const source='http://covers.openlibrary.org/b/id/'+cover_i+'-M.jpg';
         let imageError=false;
         return (
                 <BookImageWrapper>
-                   {!imageError && <img src={source} onError={imageError=true}/>}
+                   {!imageError && <img src={source} alt={title} onError={imageError=true}/>}
                    {imageError && <div>Image Unavailable</div>}
                 </BookImageWrapper>
         );
@@ -25,8 +27,8 @@ export default function BookCard(props) {
 
     return (
         <BookCardWrapper>
-            {displayBookImage(props.cover_i)}
-            {displayBookHeader(props.title, props.author_name)}
+            {displayBookImage()}
+            {displayBookHeader()}
             {props.children}
         </BookCardWrapper>
     )
