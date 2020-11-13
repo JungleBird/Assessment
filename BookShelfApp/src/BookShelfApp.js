@@ -24,7 +24,6 @@ class BookShelfApp extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({results: data.docs})
-      console.log(data);
     });
 
     event.preventDefault();
@@ -59,20 +58,17 @@ class BookShelfApp extends Component {
 
     return (
         <BookShelfWrapper>
-            {this.state.results && this.state.results.slice(0,7).map((book, index) => (
-                <div>
-                    <BookCard 
-                        key={'searchShelf' + index} 
-                        {...book}
-                    >
-                      {this.state.savedResults.includes(book) 
-                      ? <SubText>Already Saved</SubText>
-                      : <button onClick={()=> this.addToBookshelf(book)}
-                      >
-                          Add
-                      </button>}
-                    </BookCard>
-                </div>
+            {this.state.results && this.state.results.map((book, index) => (
+                <BookCard 
+                    key={'searchShelf' + index} 
+                    {...book}
+                >
+                    {this.state.savedResults.includes(book) 
+                    ? <SubText>Already in bookshelf</SubText>
+                    : <button onClick={()=> this.addToBookshelf(book)}>
+                        Add
+                    </button>}
+                </BookCard>
             ))}
       </BookShelfWrapper>
     );
@@ -82,18 +78,14 @@ class BookShelfApp extends Component {
     return (
         <BookShelfWrapper>
           {this.state.results && this.state.savedResults.map((savedBook, index) => (
-              <div>
                 <BookCard 
                     key={'savedShelf' + index} 
                     {...savedBook} 
                 >
-                  <button onClick={()=>this.removeFromBookshelf(savedBook)}
-                  >
+                  <button onClick={()=>this.removeFromBookshelf(savedBook)}>
                       Remove
                   </button>  
                 </BookCard>
-
-            </div>
         ))}
         </BookShelfWrapper>
     )}
