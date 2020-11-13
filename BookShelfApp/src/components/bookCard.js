@@ -16,11 +16,9 @@ export default function BookCard(props) {
 
     const displayBookImage = () => {
         const source='http://covers.openlibrary.org/b/id/'+cover_i+'-M.jpg';
-        let imageError=false;
         return (
                 <BookImageWrapper>
-                   {!imageError && <img src={source} alt={title} onError={imageError=true}/>}
-                   {imageError && <div>Image Unavailable</div>}
+                    <img src={source} alt={title}/>
                 </BookImageWrapper>
         );
     }
