@@ -30,6 +30,20 @@ class BookShelfApp extends Component {
     event.preventDefault();
   }
 
+  addToBookshelf = (book) => {
+    this.setState({
+      savedResults: [...this.state.savedResults, book]
+    })
+  };
+
+  removeFromBookshelf = (book) => {
+    this.setState({
+      savedResults: this.state.savedResults.filter(function(shelfBook) {
+        return book !== shelfBook
+      })
+    })
+  };
+
   displaySearchField = () => {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -48,20 +62,16 @@ class BookShelfApp extends Component {
             {this.state.results && this.state.results.slice(0,7).map((book, index) => (
                 <div>
                     <BookCard 
-                        key={'searched' + index} 
+                        key={'searchShelf' + index} 
                         {...book}
-                    />
-                    {this.state.savedResults.includes(book) 
-                    ? <SubText>Already Saved</SubText>
-                    : <button 
-                        key={'searchedButton' + index}
-                        onClick={()=>{
-                            this.setState({
-                            savedResults: [...this.state.savedResults, book]
-                        })}}
                     >
-                        Add
-                    </button>}
+                      {this.state.savedResults.includes(book) 
+                      ? <SubText>Already Saved</SubText>
+                      : <button onClick={()=> this.addToBookshelf(book)}
+                      >
+                          Add
+                      </button>}
+                    </BookCard>
                 </div>
             ))}
       </BookShelfWrapper>
@@ -74,19 +84,15 @@ class BookShelfApp extends Component {
           {this.state.results && this.state.savedResults.map((savedBook, index) => (
               <div>
                 <BookCard 
-                    key={'savedBook' + index} 
+                    key={'savedShelf' + index} 
                     {...savedBook} 
-                />
-                <button 
-                    key={'savedButton' + index} 
-                    onClick={()=>{this.setState({
-                        savedResults: this.state.savedResults.filter(function(removeBook) {
-                        return savedBook !== removeBook
-                        })
-                    })}}
                 >
-                    Remove
-                </button>
+                  <button onClick={()=>this.removeFromBookshelf(savedBook)}
+                  >
+                      Remove
+                  </button>  
+                </BookCard>
+
             </div>
         ))}
         </BookShelfWrapper>
