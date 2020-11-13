@@ -25,6 +25,7 @@ export default function BookCard(props) {
         <div>
             {displayBookImage(props.cover_i)}
             {displayBookHeader(props.title, props.author_name)}
+            {props.children}
         </div>
     )
 }
